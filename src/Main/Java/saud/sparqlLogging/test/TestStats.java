@@ -1,8 +1,8 @@
-package main.Java.saud.sparqlLogging.test;
+package main.java.saud.sparqlLogging.test;
 
 import java.util.ArrayList;
 
-import main.Java.saud.sparqlLogging.model.Stats;
+import main.java.saud.sparqlLogging.model.Stats;
 
 public class TestStats {
 

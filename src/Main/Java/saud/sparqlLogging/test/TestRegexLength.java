@@ -1,4 +1,4 @@
-package main.Java.saud.sparqlLogging.test;
+package main.java.saud.sparqlLogging.test;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

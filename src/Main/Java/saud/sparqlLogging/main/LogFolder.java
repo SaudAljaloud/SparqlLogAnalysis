@@ -1,4 +1,4 @@
-package main.Java.saud.sparqlLogging.main;
+package main.java.saud.sparqlLogging.main;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import org.slf4j.Logger;
 
-import main.Java.saud.sparqlLogging.model.Query;
-import main.Java.saud.sparqlLogging.model.Regex;
-import main.Java.saud.sparqlLogging.model.Stats;
+import main.java.saud.sparqlLogging.model.Query;
+import main.java.saud.sparqlLogging.model.Regex;
+import main.java.saud.sparqlLogging.model.Stats;
 
 public class LogFolder {
 	Logger log = org.slf4j.LoggerFactory.getLogger(LogFolder.class);

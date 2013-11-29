@@ -1,4 +1,4 @@
-package main.Java.saud.sparqlLogging.test;
+package main.java.saud.sparqlLogging.test;
 
 import java.io.BufferedReader;
 import java.io.File;
