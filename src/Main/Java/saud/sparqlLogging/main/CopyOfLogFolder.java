@@ -12,8 +12,8 @@ import main.java.saud.sparqlLogging.model.Query;
 import main.java.saud.sparqlLogging.model.Regex;
 import main.java.saud.sparqlLogging.model.Stats;
 
-public class LogFolder {
-	Logger log = org.slf4j.LoggerFactory.getLogger(LogFolder.class);
+public class CopyOfLogFolder {
+	Logger log = org.slf4j.LoggerFactory.getLogger(CopyOfLogFolder.class);
 	Regex regex = new Regex();
 
 	private String queryDataset;
@@ -50,7 +50,7 @@ public class LogFolder {
 	String disFile = null;
 
 	public static void main(String[] args) {
-		LogFolder arg = new LogFolder();
+		CopyOfLogFolder arg = new CopyOfLogFolder();
 
 		if (args.length == 0) {
 			System.out.println("insert one argument as the path to the folder");
@@ -61,7 +61,12 @@ public class LogFolder {
 
 	}
 
+	private String currentPath = null;
+	private int flagCounter = 0;
+
 	private void ExtractRegexFromDirToFile(String path) {
+
+		this.currentPath = path;
 
 		File folder = new File(path);
 		if (folder.isDirectory()) {
@@ -80,23 +85,14 @@ public class LogFolder {
 					log.debug("The file " + file.getName()
 							+ " doesn't contain log");
 			}
-			String resultPath = path + "/Result2";
-			File resultPathFile = new File(resultPath);
-			if (!resultPathFile.exists()) {
-				resultPathFile.mkdir();
-			}
-			regex.printRegexesToFile(resultPath);
-			Stats st = new Stats(regex.getRegexes(), regex.getFlag());
-			st.printStats(numberOfLines, getIngenuneQueriesDecoding().size(),
-					getIngenuneQueriesSyntax().size());
-			st.printStatsToFile(resultPath, numberOfLines,
-					getIngenuneQueriesDecoding(), getIngenuneQueriesSyntax());
 
 		} else {
 			System.out.println("The path: " + path + " is not a directory");
 		}
-
+		finishingWritingToFile();
 	}
+
+	int MAXARRAYSIZE = 20000;
 
 	private void forEachLog(String filePath) {
 		File in = new File(filePath);
@@ -111,7 +107,11 @@ public class LogFolder {
 						query.jena(query.getQueryString());
 						if (!query.isIngenuneQuerySyntax()) {
 							regex.addRegexes(query.regex);
-							regex.addFlag(query.getFlag());
+							flagCounter = flagCounter + query.getFlag();
+							if (MAXARRAYSIZE <= regex.regexes.size()) {
+								flushToFile();
+								regex = new Regex();
+							}
 						} else {
 							AddIngenuneQueriesSyntax(query
 									.getIngenuneQuerySyntax());
@@ -121,7 +121,10 @@ public class LogFolder {
 						AddIngenuneQueriesDecoding(query
 								.getIngenuneQueryDecoding());
 					}
+					
 				}
+
+				// write regexes to file when max is reached
 
 			}
 			reader.close();
@@ -132,4 +135,37 @@ public class LogFolder {
 		}
 	}
 
+	public void flushToFile() {
+		String resultPath = currentPath + "/Result";
+		File resultPathFile = new File(resultPath);
+		if (!resultPathFile.exists()) {
+			resultPathFile.mkdir();
+		}
+		regex.printRegexesToFile(resultPath);
+
+	}
+
+	public void finishingWritingToFile() {
+		flushToFile();
+
+		ArrayList<String> finalRegexes = new ArrayList<>();
+
+		File in = new File(currentPath + "/Result/Regexes.txt");
+
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(in));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				finalRegexes.add(line);
+			}
+			reader.close();
+			Stats st = new Stats(finalRegexes, flagCounter);
+			st.printStats(numberOfLines, getIngenuneQueriesDecoding().size(),
+					getIngenuneQueriesSyntax().size());
+			st.printStatsToFile(currentPath, numberOfLines,
+					getIngenuneQueriesDecoding(), getIngenuneQueriesSyntax());
+		} catch (IOException e) {
+
+		}
+	}
 }

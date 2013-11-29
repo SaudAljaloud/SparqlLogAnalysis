@@ -1,1 +1,1 @@
-java -Xmx2048m -Djava.util.logging.config.file=etc/jdk14.properties -cp target/SparqlLogAnalysis.jena-0.0.1.jar:target/dependency/* main.Java.saud.sparqlLogging.main.LogFolder $1
+java -Xmx2048m -Djava.util.logging.config.file=etc/jdk14.properties -cp target/SparqlLogAnalysis.jena-0.0.1.jar:target/dependency/* main.java.saud.sparqlLogging.main.CopyOfLogFolder $1
