@@ -1,4 +1,4 @@
-package Test;
+package main.Java.saud.sparqlLogging.test;
 
 import java.util.ArrayList;
 

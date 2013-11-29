@@ -1,4 +1,4 @@
-package Model;
+package main.Java.saud.sparqlLogging.model;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
 
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QueryParseException;
@@ -19,7 +21,7 @@ import com.hp.hpl.jena.sparql.syntax.ElementVisitorBase;
 import com.hp.hpl.jena.sparql.syntax.ElementWalker;
 
 public class Query {
-
+	Logger log = org.slf4j.LoggerFactory.getLogger(Query.class);
 	private String queryString;
 
 	public String getQueryString() {
@@ -112,17 +114,15 @@ public class Query {
 		try {
 			setQueryString(URLDecoder.decode(getQueryString(), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("Error with UnsupportedEncodingException");
-			System.out.println(e);
-			// System.out.println(getQueryString());
+			log.error("Error with UnsupportedEncodingException");
+			log.error(e.fillInStackTrace().toString());
 		} catch (IllegalArgumentException e) {
 			String wrongString = getQueryString().replaceAll("%.?HTTP/1..", "");
 			try {
 				setQueryString(URLDecoder.decode(wrongString, "UTF-8"));
 			} catch (UnsupportedEncodingException e1) {
-				System.out.println("Error with UnsupportedEncodingException");
-				System.out.println(e1);
-				// System.out.println(getQueryString());
+				log.error("Error with UnsupportedEncodingException");
+				log.error(e1.fillInStackTrace().toString());
 			} catch (IllegalArgumentException e1) {
 				setIngenuneQueryDecoding(true);
 				setIngenuneQueryDecoding(getQueryString());
@@ -189,15 +189,14 @@ public class Query {
 				String prefix2 = "PREFIX " + prefix + ": <>\n" + query;
 				setQueryString(prefix2);
 				jena(getQueryString());
-				
-			} 
-			else if (e.getMessage().toLowerCase().contains("\"count\"")) {
-				String q = getQueryString().replaceAll("(?i)count\\((.*?)\\)|as", "");
+
+			} else if (e.getMessage().toLowerCase().contains("\"count\"")) {
+				String q = getQueryString().replaceAll(
+						"(?i)count\\((.*?)\\)|as", "");
 				setQueryString(q);
-				System.out.println(getQueryString());
+				log.debug(getQueryString());
 				jena(getQueryString());
-			}
-			else {
+			} else {
 				setIsIngenuneQuerySyntax(true);
 				setIngenuneQuerySyntax(getQueryString() + "\n" + e.toString());
 

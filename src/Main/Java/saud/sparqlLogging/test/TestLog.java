@@ -1,8 +1,9 @@
-package Test;
+package main.Java.saud.sparqlLogging.test;
 
 import java.util.ArrayList;
 
-import Model.Query;
+import main.Java.saud.sparqlLogging.model.Query;
+
 
 public class TestLog {
 	

@@ -1,9 +1,10 @@
-package Test;
+package main.Java.saud.sparqlLogging.test;
 
 import java.util.ArrayList;
 
-import Model.Query;
-import Model.Regex;
+import main.Java.saud.sparqlLogging.model.Query;
+import main.Java.saud.sparqlLogging.model.Regex;
+
 
 /**
 Auther: saudaljaloud

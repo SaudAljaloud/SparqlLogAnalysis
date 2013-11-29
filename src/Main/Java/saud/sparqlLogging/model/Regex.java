@@ -1,4 +1,4 @@
-package Model;
+package main.Java.saud.sparqlLogging.model;
 
 import java.io.BufferedWriter;
 import java.io.File;

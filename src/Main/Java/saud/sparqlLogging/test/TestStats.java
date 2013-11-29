@@ -1,10 +1,8 @@
-package Test;
+package main.Java.saud.sparqlLogging.test;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import Model.Stats;
+import main.Java.saud.sparqlLogging.model.Stats;
 
 public class TestStats {
 
@@ -26,9 +24,9 @@ public class TestStats {
 		regexes.add("^http://www.this.is.a.url");
 		regexes.add("^www.saud.com");
 		regexes.add("+sasa");	
-		regexes.add("^��������������$");
-		regexes.add("^���");
-		regexes.add("^��������");
+		regexes.add("^dffffdf$");
+		regexes.add("^fghhhdgh");
+		regexes.add("^fghfghfgh");
 		regexes.add("\"\"");
 		regexes.add("\"^*\"");
 

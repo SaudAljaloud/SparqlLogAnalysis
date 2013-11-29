@@ -1,4 +1,4 @@
-package Main;
+package main.Java.saud.sparqlLogging.main;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,12 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Model.Query;
-import Model.Regex;
-import Model.Stats;
+import org.slf4j.Logger;
+
+import main.Java.saud.sparqlLogging.model.Query;
+import main.Java.saud.sparqlLogging.model.Regex;
+import main.Java.saud.sparqlLogging.model.Stats;
 
 public class LogFolder {
-
+	Logger log = org.slf4j.LoggerFactory.getLogger(LogFolder.class);
 	Regex regex = new Regex();
 
 	private String queryDataset;
@@ -21,22 +23,25 @@ public class LogFolder {
 	}
 
 	private ArrayList<String> ingenuneQueriesDecoding = new ArrayList<>();
+
 	public ArrayList<String> getIngenuneQueriesDecoding() {
 		return ingenuneQueriesDecoding;
 	}
+
 	public void AddIngenuneQueriesDecoding(String ingenuneQueriesDecoding) {
 		this.ingenuneQueriesDecoding.add(ingenuneQueriesDecoding);
 	}
 
 	private ArrayList<String> ingenuneQueriesSyntax = new ArrayList<>();
+
 	public ArrayList<String> getIngenuneQueriesSyntax() {
 		return ingenuneQueriesSyntax;
 	}
+
 	public void AddIngenuneQueriesSyntax(String ingenuneQueriesSyntax) {
 		this.ingenuneQueriesSyntax.add(ingenuneQueriesSyntax);
 	}
-	
-	
+
 	public void setQueryDataset(String queryDataset) {
 		this.queryDataset = queryDataset;
 	}
@@ -65,25 +70,27 @@ public class LogFolder {
 			for (int i = 0; i < listOfFiles.length; i++) {
 				File file = listOfFiles[i];
 				if (file.isFile() && file.getName().contains("log")) {
-					System.out.println("The file will be processed is: "
+					log.debug("The file will be processed is: "
 							+ file.getPath());
 					forEachLog(file.getPath());
 					// Runtime.getRuntime().exec("purge");
 					// System.gc();
 
 				} else
-					System.out.println("The file " + file.getName()
+					log.debug("The file " + file.getName()
 							+ " doesn't contain log");
 			}
 			String resultPath = path + "/Result";
 			File resultPathFile = new File(resultPath);
-			  if (!resultPathFile.exists()) {
-				  resultPathFile.mkdir();
-			  }
+			if (!resultPathFile.exists()) {
+				resultPathFile.mkdir();
+			}
 			regex.printRegexesToFile(resultPath);
 			Stats st = new Stats(regex.getRegexes(), regex.getFlag());
-			st.printStats(numberOfLines, getIngenuneQueriesDecoding().size(), getIngenuneQueriesSyntax().size());
-			st.printStatsToFile(resultPath, numberOfLines, getIngenuneQueriesDecoding(),getIngenuneQueriesSyntax());
+			st.printStats(numberOfLines, getIngenuneQueriesDecoding().size(),
+					getIngenuneQueriesSyntax().size());
+			st.printStatsToFile(resultPath, numberOfLines,
+					getIngenuneQueriesDecoding(), getIngenuneQueriesSyntax());
 
 		} else {
 			System.out.println("The path: " + path + " is not a directory");
@@ -97,7 +104,7 @@ public class LogFolder {
 			BufferedReader reader = new BufferedReader(new FileReader(in));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				numberOfLines+=1;
+				numberOfLines += 1;
 				if (line.toLowerCase().contains("regex")) {
 					Query query = new Query(line);
 					if (!query.isIngenuneQueryDecoding()) {
@@ -105,20 +112,20 @@ public class LogFolder {
 						if (!query.isIngenuneQuerySyntax()) {
 							regex.addRegexes(query.regex);
 							regex.addFlag(query.getFlag());
-						}
-						else{
-							AddIngenuneQueriesSyntax(query.getIngenuneQuerySyntax());
+						} else {
+							AddIngenuneQueriesSyntax(query
+									.getIngenuneQuerySyntax());
 						}
 
 					} else {
-						AddIngenuneQueriesDecoding(query.getIngenuneQueryDecoding());
+						AddIngenuneQueriesDecoding(query
+								.getIngenuneQueryDecoding());
 					}
 				}
 
 			}
 			reader.close();
 			reader = null;
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
