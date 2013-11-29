@@ -193,6 +193,8 @@ public class Query {
 			} else if (e.getMessage().toLowerCase().contains("\"count\"")) {
 				String q = getQueryString().replaceAll(
 						"(?i)count\\((.*?)\\)|as", "");
+				System.out.println(e.fillInStackTrace().toString());
+				System.out.println(getQueryString());
 				setQueryString(q);
 				log.debug(getQueryString());
 				jena(getQueryString());
