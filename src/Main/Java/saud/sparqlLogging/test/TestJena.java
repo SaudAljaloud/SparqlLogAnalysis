@@ -1,9 +1,9 @@
-package main.java.saud.sparqlLogging.test;
+package Main.Java.saud.sparqlLogging.test;
 
 import java.util.ArrayList;
 
-import main.java.saud.sparqlLogging.model.Query;
-import main.java.saud.sparqlLogging.model.Regex;
+import Main.Java.saud.sparqlLogging.model.Query;
+import Main.Java.saud.sparqlLogging.model.Regex;
 
 
 /**
@@ -27,7 +27,15 @@ public class TestJena {
 				"";
 		String q4 = "1dfa92f5728708ea2d33a35c40f32477 - - [27/Jul/2012 00:00:00 +0200] \"/sparql?query=prefix+owl%3a+%3chttp%3a%2f%2fwww.w3.org%2f2002%2f07%2fowl%23%3e+select+*+where+%7b+%3chttp%3a%2f%2fdbpedia.org%2fresource%2fHoliday_Inn%3e+rdfs%3Alabel+%3flabel+FILTER+(lang(%3flabel)+%3d%22it%22)+.+optional%7b%3chttp%3a%2f%2fdbpedia.org%2fresource%2fHoliday_Inn%3e+owl%3asameAs+%3ffreebaseMid+FILTER+(regex(%3ffreebaseMid%2c+%22freebase%22%2c%22i%22))%7d+.+++%7d&default-graph-uri=http%3A%2F%2Fdbpedia.org\" 200 512 \"-\" \"-\"\n" + 
 				"";
-		Query query = new Query(q4);
+		String q5 = "./http02102013.log:682f38e0c47fbae8d569d5c6d02aef18 - - [02/Oct/2013 00:00:00 +0300] \"GET /sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=prefix+dbpr%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2F%3E%0D%0Aprefix+dbpo%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0D%0Aprefix+dbpp%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2F%3E%0D%0A%0D%0ASELECT+%3Fname+%3Fcountry+%3Fpopulation%0D%0A%09WHERE+%7B%0D%0A%09%3Fcity+dbpo%3Acountry+%3Fc+.%0D%0A%09%3Fc+dbpo%3AlongName+%3Fname+.%0D%0A%09%3Fc+dbpo%3Aabstract+%3Fcountry+.%0D%0A%09%3Fc+dbpp%3ApopulationEstimate+%3Fpopulation+.%0D%0A%09%0D%0AFILTER+%28regex+%28str%28%3Fcity%29%2C+%22amsterdam%22%2C+%22i%22%29+%26%26+langMatches%28lang%28%3Fprovince%29%2C+%27nl%27%29%29%0D%0A%0D%0A%7D&format=text%2Fhtml&timeout=30000&debug=on HTTP/1.1\" 200 0 \"-\" \"R\" \"-\"\n" + 
+				"";
+		String q6 = "0.0.3.239 - - [02/Oct/2012:13:43:48 +0200] \"GET /sparql?query=SELECT++%3Fsub%0AWHERE%0A++%7B+%3Fsub+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type%3E+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23Class%3E%0A++++FILTER+regex%28str%28%3Fsub%29%2C+%22%5Ehttp%3A%2F%2Flinkedgeodata.org%2Fontology%2F%22%29%0A++%7D%0ALIMIT+++50000%0A HTTP/1.1\" 200 112104 \"-\" \"Java/1.6.0_24\"\n" + 
+				"";
+		
+		String q7 = "675868 0.0.0.0 - - [18/Dec/2009:11:34:20 -0800] \"GET /sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&should-sponge=&query=prefix+rdfs%3A+%3Chttp%3A%2F%2Fww        w.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+foaf%3A+%3Chttp%        3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E+%0D%0APREFIX+dbpedia%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2F%3E%0D%0APREFIX+dbpprop%3A+%3Chttp%3A%2F%2Fdbpedi        a.org%2Fproperty%2F%3E%0D%0APREFIX+dbpedia-owl%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0D%0Aprefix+owl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F0        7%2Fowl%23%3E%0D%0Aprefix+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0D%0Aselect+DISTINCT+%3Fname+%3Ftitle+++%0D%0AWHERE%0D%0A%        7B+++++%0D%0A%0D%0A%3FgreekEurovision+rdf%3Atype++skos%3AConcept.%0D%0A%3FgreekEurovision+rdfs%3Alabel++%3Flabel.%0D%0AFILTER+%28regex%28str%28%3Flabel        %29%2C+%22Greek%22%29%29.%0D%0AFILTER+%28regex%28str%28%3Flabel%29%2C+%22Eurovision%22%29%29.%0D%0AFILTER+%28regex%28str%28%3Flabel%29%2C+%22entrants%2        2%29%29.%0D%0A%0D%0A%3Fartist+rdf%3Atype+dbpedia-owl%3AArtist.%0D%0A%3Fartist+skos%3Asubject+%3FgreekEurovision.%0D%0A%3Fartist+dbpedia-owl%3AbirthPlac        e+%3Fcity.%0D%0A%3Fartist+dbpedia-owl%3AbirthPlace+%3Fcountry.%0D%0A%3Fartist+foaf%3Aname+%3Fname.%0D%0A%3Fcountry+rdf%3Atype+dbpedia-owl%3APlace.%0D%0        A%3Fcity+rdf%3Atype++dbpedia-owl%3AArea.%0D%0A%3Fcountry+skos%3Asubject++Category%3AEuropean_Union_member_states.%0D%0A%0D%0A%3Fsong+skos%3Asubject++Ca        tegory%3AGreek_Eurovision_songs.%0D%0A%3Fsong+dbpedia-owl%3AmusicalArtist+%3Fartist.%0D%0A%3Fsong+foaf%3Aname+%3Ftitle.%0D%0A%7D&format=text%2Fhtml&deb        ug=on&timeout= HTTP/1.1\" 400 612 \"http://dbpedia.org/sparql\" \"Mozilla/5.0 (Windows; U; Windows NT 6.0; el; rv:1.9.0.15) Gecko/2009101601 Firefox/3.0.15         (.NET CLR 3.5.30729)\" \"GR\" \"941a9f0e359288a0d9e0218f3c8ab9f7702c7a0b\"\n" + 
+				"";
+		
+		Query query = new Query(q7);
 		if (!query.isIngenuneQueryDecoding()) {
 			query.jena(query.getQueryString());
 			if (!query.isIngenuneQuerySyntax()) {

@@ -1,4 +1,4 @@
-package main.java.saud.sparqlLogging.main;
+package Main.Java.saud.sparqlLogging.main;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import org.slf4j.Logger;
 
-import main.java.saud.sparqlLogging.model.Query;
-import main.java.saud.sparqlLogging.model.Regex;
-import main.java.saud.sparqlLogging.model.Stats;
+import Main.Java.saud.sparqlLogging.model.Query;
+import Main.Java.saud.sparqlLogging.model.Regex;
+import Main.Java.saud.sparqlLogging.model.Stats;
 
 public class CopyOfLogFolder {
 	Logger log = org.slf4j.LoggerFactory.getLogger(CopyOfLogFolder.class);
@@ -75,7 +75,7 @@ public class CopyOfLogFolder {
 			for (int i = 0; i < listOfFiles.length; i++) {
 				File file = listOfFiles[i];
 				if (file.isFile() && file.getName().contains("log")) {
-					log.debug("The file will be processed is: "
+					System.out.println("The file will be processed is: "
 							+ file.getPath());
 					forEachLog(file.getPath());
 					// Runtime.getRuntime().exec("purge");
@@ -92,7 +92,7 @@ public class CopyOfLogFolder {
 		finishingWritingToFile();
 	}
 
-	int MAXARRAYSIZE = 20000;
+	int MAXARRAYSIZE = 500000;
 
 	private void forEachLog(String filePath) {
 		File in = new File(filePath);

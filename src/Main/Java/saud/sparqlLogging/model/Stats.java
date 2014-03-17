@@ -1,4 +1,4 @@
-package main.java.saud.sparqlLogging.model;
+package Main.Java.saud.sparqlLogging.model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -397,7 +397,7 @@ public class Stats {
 
 		int sumOfIngenuneQueries = IngenuneQueriesDecoding.size()
 				+ IngenuneQueriesSyntax.size();
-		String StatsDir = dir + "/Stats.txt";
+		String StatsDir = dir + "/Result/Stats.txt";
 		File StatsOut = new File(StatsDir);
 		try {
 			StatsOut.createNewFile();
@@ -463,7 +463,7 @@ public class Stats {
 		}
 
 		String IngenuneQueriesDecodingDir = dir
-				+ "/IngenuneQueriesDecoding.txt";
+				+ "/Result/IngenuneQueriesDecoding.txt";
 		File IngenuneQueriesDecodingOut = new File(IngenuneQueriesDecodingDir);
 		try {
 			IngenuneQueriesDecodingOut.createNewFile();
@@ -479,7 +479,7 @@ public class Stats {
 			e.printStackTrace();
 		}
 
-		String IngenuneQueriesSyntaxDir = dir + "/IngenuneQueriesSyntax.txt";
+		String IngenuneQueriesSyntaxDir = dir + "/Result/IngenuneQueriesSyntax.txt";
 		File IngenuneQueriesSyntaxOut = new File(IngenuneQueriesSyntaxDir);
 		try {
 			IngenuneQueriesSyntaxOut.createNewFile();

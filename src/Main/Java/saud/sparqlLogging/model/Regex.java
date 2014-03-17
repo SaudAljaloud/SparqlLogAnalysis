@@ -1,4 +1,4 @@
-package main.java.saud.sparqlLogging.model;
+package Main.Java.saud.sparqlLogging.model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import main.java.saud.sparqlLogging.main.CopyOfLogFolder;
+import Main.Java.saud.sparqlLogging.main.CopyOfLogFolder;
 
 import org.slf4j.Logger;
 

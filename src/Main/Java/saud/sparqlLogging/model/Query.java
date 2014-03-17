@@ -1,4 +1,4 @@
-package main.java.saud.sparqlLogging.model;
+package Main.Java.saud.sparqlLogging.model;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -103,7 +103,19 @@ public class Query {
 	private void extractQueryPartOutOfFullLog() {
 		String log = getQueryString();
 		List<String> tokens = Arrays.asList(log.split("\\s+"));
-		String prequery = tokens.get(6).replaceFirst(".*query=", "");
+		String prequery = "";
+		for (int i = 0; i < tokens.size(); i++) {
+			if (tokens.get(i).contains("query=")){
+				prequery = tokens.get(i).replaceFirst(".*query=", "");
+			}
+		}
+		
+//		if (log.toLowerCase().contains(" \"get ")) {
+//			prequery = tokens.get(7).replaceFirst(".*query=", "");
+//		} else {
+//			prequery = tokens.get(6).replaceFirst(".*query=", "");
+//		}
+
 		String prequery2 = prequery.replaceAll("\"|&.*", "");
 		String query = prequery2.replaceAll("((?i)bif%3Acontains)", "%3C$0%3E");
 		setQueryString(query);
@@ -117,7 +129,8 @@ public class Query {
 			log.error("Error with UnsupportedEncodingException");
 			log.error(e.fillInStackTrace().toString());
 		} catch (IllegalArgumentException e) {
-			String wrongString = getQueryString().replaceAll("%.?HTTP/1..", "");
+			String wrongString = getQueryString().replaceAll("(%.?)?HTTP/1..",
+					"");
 			try {
 				setQueryString(URLDecoder.decode(wrongString, "UTF-8"));
 			} catch (UnsupportedEncodingException e1) {
@@ -187,16 +200,15 @@ public class Query {
 					prefix = m.group(1);
 				}
 				String prefix2 = "PREFIX " + prefix + ": <>\n" + query;
+				log.trace(prefix2);
 				setQueryString(prefix2);
 				jena(getQueryString());
 
-			} else if (e.getMessage().toLowerCase().contains("\"count\"")) {
+			} else if (e.getMessage().toLowerCase()
+					.contains("encountered \" \"count\"")) {
 				String q = getQueryString().replaceAll(
-						"(?i)count\\((.*?)\\)|as", "");
-				System.out.println(e.fillInStackTrace().toString());
-				System.out.println(getQueryString());
+						"(?i)count\\((.*?)\\)|as|(?i)COUNT", "");
 				setQueryString(q);
-				log.debug(getQueryString());
 				jena(getQueryString());
 			} else {
 				setIsIngenuneQuerySyntax(true);
@@ -204,6 +216,9 @@ public class Query {
 
 			}
 
+		} catch (Exception e) {
+			setIsIngenuneQuerySyntax(true);
+			setIngenuneQuerySyntax(getQueryString() + "\n" + e.toString());
 		}
 
 	}
