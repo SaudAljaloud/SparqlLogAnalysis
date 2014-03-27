@@ -11,9 +11,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
-import Main.Java.saud.sparqlLogging.model.Query;
 import Main.Java.saud.sparqlLogging.model.QueryWithPatternAnalysis;
-import Main.Java.saud.sparqlLogging.model.Regex;
 
 public class LogFolderPatternAnalysisBioPortal {
 	Logger log = org.slf4j.LoggerFactory
