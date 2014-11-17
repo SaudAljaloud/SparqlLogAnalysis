@@ -121,7 +121,7 @@ public class CopyOfLogFolder {
 						AddIngenuneQueriesDecoding(query
 								.getIngenuneQueryDecoding());
 					}
-					
+
 				}
 
 				// write regexes to file when max is reached

@@ -35,7 +35,80 @@ public class Stats {
 	private int justLetters = 0;
 	private int justNumbers = 0;
 
+	private int noMetaChar = 0;
+	private int alternation = 0;
+	private int restrictedQuantifiers = 0;
+	private int grouping = 0;
+	private int backRef = 0;
+	private int quantifiers = 0;
+	private int reluctantQuantifiers = 0;
+	private int characterClass = 0;
+
 	private int flag = 0;
+
+	public int getCharacterClass() {
+		return characterClass;
+	}
+
+	public void addCharacterClass() {
+		this.characterClass += 1;
+	}
+
+	public int getReluctantQuantifiers() {
+		return reluctantQuantifiers;
+	}
+
+	public void addReluctantQuantifiers() {
+		this.reluctantQuantifiers += 1;
+	}
+
+	public int getQantifiers() {
+		return quantifiers;
+	}
+
+	public void addQantifiers() {
+		this.quantifiers += 1;
+	}
+
+	public int getBackref() {
+		return backRef;
+	}
+
+	public void addBackref() {
+		this.backRef += 1;
+	}
+
+	public int getGrouping() {
+		return grouping;
+	}
+
+	public void addGrouping() {
+		this.grouping += 1;
+	}
+
+	public int getRestrictedQuantifiers() {
+		return restrictedQuantifiers;
+	}
+
+	public void addRestrictedQuantifiers() {
+		this.restrictedQuantifiers += 1;
+	}
+
+	public int getAlternation() {
+		return alternation;
+	}
+
+	public void addAlternation() {
+		this.alternation += 1;
+	}
+
+	public int getNoMetaChar() {
+		return noMetaChar;
+	}
+
+	public void addNoMetaChar() {
+		this.noMetaChar += 1;
+	}
 
 	public int getFlag() {
 		return flag;
@@ -241,13 +314,56 @@ public class Stats {
 		setFlag(flag);
 
 		for (int i = 0; i < regexes.size(); i++) {
-			Pattern p = Pattern.compile("[a-zA-Z0-9]");
+			Pattern p = Pattern
+					.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS);
 			Matcher m = p.matcher(regexes.get(i));
 			if (!m.find()) {
 				addIngenuen();
 
 			} else {
-				p = Pattern.compile("[a-zA-Z0-9].*\\$$");
+				p = Pattern.compile("([^\\\\]|^)\\[.+?[^\\\\]\\]");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addCharacterClass();
+				}
+				p = Pattern
+						.compile("[^\\\\]((\\?\\?)|(\\*\\?)|(\\+\\?)|(\\}\\?))");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addReluctantQuantifiers();
+				}
+				p = Pattern.compile("[^\\\\][\\*\\?\\+]");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addQantifiers();
+				}
+				p = Pattern
+						.compile("(\\\\(.*?\\\\).*\\1)|(\\\\(.*?\\\\).*\\2)");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addBackref();
+				}
+				p = Pattern.compile("([^\\\\]|^)\\(.+?[^\\\\]\\)");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addGrouping();
+				}
+				p = Pattern.compile("[^\\\\]\\{[0-9, ]+?\\}");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addRestrictedQuantifiers();
+				}
+				p = Pattern.compile("[^\\\\]\\|.");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addAlternation();
+				}
+				p = Pattern.compile("^\\^.+");
+				m = p.matcher(regexes.get(i));
+				if (m.find()) {
+					addStartWith();
+				}
+				p = Pattern.compile(".+\\$$");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addEndWith();
@@ -257,42 +373,37 @@ public class Stats {
 				if (m.find()) {
 					addNegation();
 				}
-				p = Pattern.compile("http|www");
+				p = Pattern.compile("(?i)http|www\\.");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addUrl();
 				}
-				p = Pattern.compile("^\\^.*[a-zA-Z0-9]");
-				m = p.matcher(regexes.get(i));
-				if (m.find()) {
-					addStartWith();
-				}
-				p = Pattern.compile("([^\\.]|^)\\*");
+				p = Pattern.compile("([^\\.\\\\]|^)\\*");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addJustStar();
 				}
-				p = Pattern.compile("([^\\.]|^)\\+");
+				p = Pattern.compile("([^\\.\\\\]|^)\\+");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addJustPlus();
 				}
-				p = Pattern.compile("\\.\\+");
+				p = Pattern.compile("([^\\\\]|^)\\.\\+[^\\?]?");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addDotPlus();
 				}
-				p = Pattern.compile("\\.\\*");
+				p = Pattern.compile("([^\\\\]|^)\\.\\*[^\\?]?");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addDotStar();
 				}
-				p = Pattern.compile("\\.\\*\\?");
+				p = Pattern.compile("([^\\\\]|^)\\.\\*\\?");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addDotStarQuestion();
 				}
-				p = Pattern.compile("\\.\\+\\?");
+				p = Pattern.compile("([^\\\\]|^)\\.\\+\\?");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addDotPlusQuestion();
@@ -302,7 +413,8 @@ public class Stats {
 				if (!isASCII(regexes.get(i))) {
 					addNotEnglishString();
 				}
-				p = Pattern.compile("^\\^.+\\$$");
+				// p = Pattern.compile("^\\^.+\\$$");
+				p = Pattern.compile("^\\^[a-zA-Z0-9 ]+\\$$");
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addExactSearch();
@@ -316,6 +428,12 @@ public class Stats {
 				m = p.matcher(regexes.get(i));
 				if (m.find()) {
 					addJustNumbers();
+				}
+				p = Pattern
+						.compile("(\\||\\.|\\?|\\*|\\+|\\{|\\}|\\(|\\)|\\[|\\])");
+				m = p.matcher(regexes.get(i));
+				if (!m.find()) {
+					addNoMetaChar();
 				}
 
 				setAverageLength(regexes.get(i).length());
@@ -355,7 +473,8 @@ public class Stats {
 		return ret;
 	}
 
-	public void printStats(int numberOfLines, int IngenuneQueriesDecoding, int IngenuneQueriesSyntax) {
+	public void printStats(int numberOfLines, int IngenuneQueriesDecoding,
+			int IngenuneQueriesSyntax) {
 
 		System.out.println("All stats:");
 		System.out.println("Number of lines being processed is:\t"
@@ -364,6 +483,7 @@ public class Stats {
 				+ IngenuneQueriesDecoding);
 		System.out.println("Number of ingenune Queries in Syntax:\t"
 				+ IngenuneQueriesSyntax);
+		System.out.println("Number of overall regexes is:\t" + getRegexesNumber());
 		System.out.println("=======================================");
 		System.out.println("Ingenuen Regexes:" + "\t" + getIngenuen());
 		System.out.println("Just *:" + "\t" + getJustStar());
@@ -381,13 +501,21 @@ public class Stats {
 		System.out.println("Max Length:" + "\t" + getMaxLength());
 		System.out.println("Negation:" + "\t" + getNegation());
 		System.out.println("URL:" + "\t" + getUrl());
-		System.out.println("flag:" + "\t" + getFlag());
 		System.out
 				.println("Not English String:" + "\t" + getNotEnglishString());
 		System.out.println("Exact Search:" + "\t" + getExactSearch());
 		System.out.println("Just Letters:" + "\t" + getJustLetters());
 		System.out.println("Just Numbers:" + "\t" + getJustNumbers());
-		System.out.println("=======================================");
+		System.out.println("No meta char:" + "\t" + getNoMetaChar());
+		System.out.println("Alternation:" + "\t" + getAlternation());
+		System.out.println("Restricted Quantifiers:" + "\t"
+				+ getRestrictedQuantifiers());
+		System.out.println("grouping:" + "\t" + getGrouping());
+		System.out.println("Character Class:" + "\t" + getCharacterClass());
+		System.out.println("Back-ref:" + "\t" + getBackref());
+		System.out.println("Quantifers:" + "\t" + getQantifiers());
+		System.out.println("Reluctant Quantifers:" + "\t"
+				+ getReluctantQuantifiers());
 
 	}
 
@@ -401,13 +529,13 @@ public class Stats {
 		File StatsOut = new File(StatsDir);
 		try {
 			StatsOut.createNewFile();
-			System.out.println("Writing the Stats file to:" + dir);
+			System.out.println("Writing the Stats file to: " + dir);
 			FileWriter fw = new FileWriter(StatsOut.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 
 			bw.write("All stats:");
 			bw.newLine();
-			bw.write("\"Number of regexes is:\t" + getRegexesNumber());
+			bw.write("Number of overall regexes is:\t" + getRegexesNumber());
 			bw.newLine();
 			bw.write("Number of lines being processed is:\t" + numberOfLines);
 			bw.newLine();
@@ -455,6 +583,24 @@ public class Stats {
 			bw.newLine();
 			bw.write("Just Numbers:" + "\t" + getJustNumbers());
 			bw.newLine();
+			bw.write("No meta char:" + "\t" + getNoMetaChar());
+			bw.newLine();
+			bw.write("Alternation:" + "\t" + getAlternation());
+			bw.newLine();
+			bw.write("Restricted Quantifiers:" + "\t"
+					+ getRestrictedQuantifiers());
+			bw.newLine();
+			bw.write("grouping:" + "\t" + getGrouping());
+			bw.newLine();
+			bw.write("Character Class:" + "\t" + getCharacterClass());
+			bw.newLine();
+			bw.write("Back-ref:" + "\t" + getBackref());
+			bw.newLine();
+			bw.write("Quantifers:" + "\t" + getQantifiers());
+			bw.newLine();
+			bw.write("Reluctant Quantifers:" + "\t" + getReluctantQuantifiers());
+			bw.newLine();
+
 			bw.write("=======================================");
 
 			bw.close();
@@ -479,7 +625,8 @@ public class Stats {
 			e.printStackTrace();
 		}
 
-		String IngenuneQueriesSyntaxDir = dir + "/Result/IngenuneQueriesSyntax.txt";
+		String IngenuneQueriesSyntaxDir = dir
+				+ "/Result/IngenuneQueriesSyntax.txt";
 		File IngenuneQueriesSyntaxOut = new File(IngenuneQueriesSyntaxDir);
 		try {
 			IngenuneQueriesSyntaxOut.createNewFile();
@@ -491,7 +638,7 @@ public class Stats {
 				bw.newLine();
 				bw.write("=========================================");
 				bw.newLine();
-				
+
 			}
 			bw.close();
 		} catch (IOException e) {

@@ -6,12 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Main.Java.saud.sparqlLogging.main.CopyOfLogFolder;
-
-import org.slf4j.Logger;
-
 public class Regex {
-	Logger log = org.slf4j.LoggerFactory.getLogger(Regex.class);
 	public ArrayList<String> regexes = new ArrayList<>();
 
 	public ArrayList<String> getRegexes() {
@@ -51,7 +46,6 @@ public class Regex {
 			}
 
 			bw.close();
-
 
 		} catch (IOException e) {
 			e.printStackTrace();

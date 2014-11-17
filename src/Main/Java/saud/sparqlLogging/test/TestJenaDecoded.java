@@ -89,7 +89,21 @@ public class TestJenaDecoded {
 				"	FILTER (lang(?o) = 'en').  \n" + 
 				"	}\n" + 
 				"Limit 10";
-		Query query = new Query(q7, false);
+		
+		String q8 = "PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
+				"PREFIX  owl:  <http://www.w3.org/2002/07/owl#>\n" + 
+				"\n" + 
+				"SELECT DISTINCT  ?s ?label\n" + 
+				"WHERE\n" + 
+				"  { GRAPH <http://bioportal.bioontology.org/ontologies/ABA>\n" + 
+				"      { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> owl:Class .\n" + 
+				"        ?s rdfs:label ?label\n" + 
+				"      }\n" + 
+				"    FILTER regex(?label, \"Nucleus\")\n" + 
+				"  }\n" + 
+				"LIMIT   10";
+		
+		Query query = new Query(q8, false);
 		query.jena(query.getQueryString());
 //		System.out.println(query.getQueryString());
 		if (!query.isIngenuneQuerySyntax()) {
