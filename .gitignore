@@ -2,4 +2,4 @@
 /target
 /.settings
 .DS_Store
-
+*.log
