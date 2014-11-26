@@ -18,6 +18,10 @@ I've tried to tide up the code into a generic interface.
 run and follow the help within the command.  
 > ./Universal.sh
 
+Or, simply run:  
+> ./Universal.sh <path/to/dir/of/logs>
+
+
 **Licensing:**  
 This code is licensed under the MIT License attached in the parent directory.  
 
