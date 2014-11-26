@@ -10,7 +10,7 @@ Parsing SPARQL queries is done by the Jena arq (Apache License, Version 2.0).
 > mvn clean install  
 > mvn dependency:copy-dependencies
 
-**Licensing:**
+**Licensing:**  
 This code is licensed under the MIT License attached in the parent directory.  
 
 
