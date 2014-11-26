@@ -19,7 +19,8 @@ run and follow the help within the command.
 > ./Universal.sh
 
 Or, simply run:  
-> ./Universal.sh <path/to/dir/of/logs>
+> ./Universal.sh <path/to/dir/of/logs>  
+
 
 
 **Licensing:**  
