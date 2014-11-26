@@ -32,7 +32,7 @@ a copy of the paper is attached in the parent directory named "aljaloud_luczakro
 > Aljaloud, Saud, Luczak-Rösch, Markus, Chown, Tim and Gibbins, Nicholas (2014) Get All, Filter Details - On the Use of Regular Expressions in SPARQL Queries. In, 4th Workshop on Usage Analysis and the Web of Data in ESWC'2014, Crete, GR, 25 May 2014.  
 
 
-**Output Sample:** 
+**Output Sample:**  
 From generated directory (Result)  
 
 **Stats.txt:** 
