@@ -10,6 +10,14 @@ Parsing SPARQL queries is done by the Jena arq (Apache License, Version 2.0).
 > mvn clean install  
 > mvn dependency:copy-dependencies
 
+
+**How to use:**  
+There are different tasks that can be done the logs (you may want to have a look into the paper, see below).  
+I've tried to tide up the code into a generic interface.  
+
+run and follow the help within the command.  
+> ./Universal.sh
+
 **Licensing:**  
 This code is licensed under the MIT License attached in the parent directory.  
 
