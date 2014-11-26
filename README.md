@@ -31,3 +31,67 @@ a copy of the paper is attached in the parent directory named "aljaloud_luczakro
 **Support:**  
 Check my profile for my email.  
 Helping is not guaranteed, asking is never a problem :)
+  
+  
+  
+
+**Output Sample:** 
+From generated directory (Result)  
+
+**Stats.txt:** 
+
+    "Number of regexes is:  1586
+    Number of lines being processed is:     115001
+    Number of ingenune Queries:     495
+    =======================================
+    Ingenuen Regexes:       21
+    Just *: 11
+    Just +: 2
+    .+:     0
+    .*:     212
+    .+?:    0
+    .*?:    0
+    Start-With:     537
+    End-With:       81
+    Average Length of entire regex: 16.629255989911726
+    Average Length of regex literal:        8.502035617828376
+    Max Length:     80
+    Negation:       6
+    URL:    567
+    flag:   551
+    Not English String:     14
+    Exact Search:   57
+    Just Letters:   559
+    Just Numbers:   15
+
+**Regexes.txt:**  
+
+    ^Tokyo
+    nfl.com
+    nfl.com
+	...
+	...
+	...
+    (Fortaleza)
+    Teatro
+    Packers
+    ^Orchard road$
+
+From generated directory (PatternAnalysis)
+
+**predicates.txt:**  
+
+    http://www.w3.org/2000/01/rdf-schema#label
+    http://dbpedia.org/ontology/wikiPageExternalLink
+    http://dbpedia.org/ontology/wikiPageExternalLink
+    http://www.w3.org/2000/01/rdf-schema#label
+    http://purl.org/dc/terms/subject
+    http://purl.org/dc/terms/subject
+    http://dbpedia.org/property/currentteam
+    http://www.w3.org/2000/01/rdf-schema#label
+
+**stats.txt:**  
+
+    Subjects: 229
+    Predicates: 89
+    Objects: 763
