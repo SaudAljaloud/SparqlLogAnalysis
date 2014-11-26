@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class TestCompareToOlder {
 
 	public static void main(String[] args) {
@@ -23,7 +27,7 @@ public class TestCompareToOlder {
 		File in2 = new File(dir2);
 		String line1 = null;
 		String line2 = null;
-		
+
 		ArrayList<String> log1 = new ArrayList<>();
 		ArrayList<String> log2 = new ArrayList<>();
 
@@ -41,7 +45,7 @@ public class TestCompareToOlder {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		log1.removeAll(log2);
 		System.out.println(log1.size());
 		for (int i = 0; i < log1.size(); i++) {

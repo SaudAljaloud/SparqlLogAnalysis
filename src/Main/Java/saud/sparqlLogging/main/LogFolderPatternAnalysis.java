@@ -13,6 +13,10 @@ import org.slf4j.Logger;
 
 import Main.Java.saud.sparqlLogging.model.QueryWithPatternAnalysis;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class LogFolderPatternAnalysis {
 	Logger log = org.slf4j.LoggerFactory
 			.getLogger(LogFolderPatternAnalysis.class);
@@ -144,20 +148,18 @@ public class LogFolderPatternAnalysis {
 
 	public void wtiteStats() {
 
-//		String predicatesPath = currentPath
-//				+ "/PatternAnalysis/predicates.txt";
-		File predicatesPath = new File(currentPath
-				+ "/PatternAnalysis");
+		// String predicatesPath = currentPath
+		// + "/PatternAnalysis/predicates.txt";
+		File predicatesPath = new File(currentPath + "/PatternAnalysis");
 		File predicatesFile = new File(currentPath
 				+ "/PatternAnalysis/stats.txt");
 		try {
 			if (!predicatesPath.exists()) {
 				predicatesPath.mkdir();
-				
+
 			}
-			
-			FileWriter fw = new FileWriter(
-					predicatesFile.getAbsoluteFile());
+
+			FileWriter fw = new FileWriter(predicatesFile.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("Subjects:\t" + subject);
 			bw.newLine();
@@ -171,23 +173,21 @@ public class LogFolderPatternAnalysis {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void finishingWritingToFile() {
 
-//		String predicatesPath = currentPath
-//				+ "/PatternAnalysis/predicates.txt";
-		File predicatesPath = new File(currentPath
-				+ "/PatternAnalysis");
+		// String predicatesPath = currentPath
+		// + "/PatternAnalysis/predicates.txt";
+		File predicatesPath = new File(currentPath + "/PatternAnalysis");
 		File predicatesFile = new File(currentPath
 				+ "/PatternAnalysis/predicates.txt");
 		try {
 			if (!predicatesPath.exists()) {
 				predicatesPath.mkdir();
-				
+
 			}
-			
-			FileWriter fw = new FileWriter(
-					predicatesFile.getAbsoluteFile());
+
+			FileWriter fw = new FileWriter(predicatesFile.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (String string : predicates) {
 				bw.write(string);

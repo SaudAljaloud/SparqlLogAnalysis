@@ -8,9 +8,12 @@ import java.util.ArrayList;
 
 import Main.Java.saud.sparqlLogging.model.StatsFromArrayList;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class GenerateStats {
 
-	
 	public static void main(String[] args) {
 		GenerateStats arg = new GenerateStats();
 
@@ -22,10 +25,8 @@ public class GenerateStats {
 		}
 
 	}
-	
 
 	public void loadRegexIntoArrayList(String filePath) {
-		
 
 		ArrayList<String> finalRegexes = new ArrayList<>();
 

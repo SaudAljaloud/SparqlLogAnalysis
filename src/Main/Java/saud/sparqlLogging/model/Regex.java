@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class Regex {
 	public ArrayList<String> regexes = new ArrayList<>();
 

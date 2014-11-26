@@ -7,37 +7,34 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 /**
-Auther: saudaljaloud
-Email: sza1g10@ecs.soton.ac.uk
+ * Auther: saudaljaloud Email: sza1g10@ecs.soton.ac.uk
  */
+
 public class TestStringBuilder {
 
 	/**
 	 * @param args
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		
-		
-		
-		BufferedReader reader = new BufferedReader(new FileReader("/home/saudubuntu/usewod2013_dataset/data/SPARQL-endpoint-logs/openbiomed/2011-02-14.log"));
+
+		BufferedReader reader = new BufferedReader(
+				new FileReader(
+						"/home/saudubuntu/usewod2013_dataset/data/SPARQL-endpoint-logs/openbiomed/2011-02-14.log"));
 		String line = null;
 		StringBuilder queryBuilder = new StringBuilder();
 		while ((line = reader.readLine()) != null) {
 
-			if (!line.equals("------------")){
+			if (!line.equals("------------")) {
 				queryBuilder.append(line);
-			}
-			else{
-				
+			} else {
+
 				System.out.println(queryBuilder);
 				queryBuilder = new StringBuilder();
 			}
-			
+
 		}
-		
-		
 
 	}
 

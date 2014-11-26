@@ -23,6 +23,10 @@ import com.hp.hpl.jena.sparql.syntax.ElementPathBlock;
 import com.hp.hpl.jena.sparql.syntax.ElementVisitorBase;
 import com.hp.hpl.jena.sparql.syntax.ElementWalker;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class TestQueryPatternAnalysis {
 	private String queryString;
 
@@ -46,22 +50,20 @@ public class TestQueryPatternAnalysis {
 
 	public static void main(String[] args) {
 
-		String a = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
-				"PREFIX ont: <http://dbpedia.org/ontology/> " +
-				"PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
-				"PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#> " +
-				"SELECT ?page ?place ?name ?date ?placelabel " +
-				"WHERE {?person ont:birthDate ?date;" +
-				" foaf:page ?page;" +
-				" ont:birthPlace ?place;" +
-				" foaf:name ?name ." +
-				" ?place rdfs:label ?placelabel ." +
-				"FILTER (lang(?placelabel) = \"en\") ." +
-				" FILTER( ( ( datatype(?date) = xsd:date ) ||" +
-				" ( datatype(?date) = xsd:dateTime ) )  " +
-				"&& ( regex(str(?date), \"1982-01-11\") )" +
-				"&& (regex(str(?place),\"Australia\") ||" +
-				" regex(str(?place),\"Melbourne\")) ) }";
+		String a = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+				+ "PREFIX ont: <http://dbpedia.org/ontology/> "
+				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "
+				+ "PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#> "
+				+ "SELECT ?page ?place ?name ?date ?placelabel "
+				+ "WHERE {?person ont:birthDate ?date;" + " foaf:page ?page;"
+				+ " ont:birthPlace ?place;" + " foaf:name ?name ."
+				+ " ?place rdfs:label ?placelabel ."
+				+ "FILTER (lang(?placelabel) = \"en\") ."
+				+ " FILTER( ( ( datatype(?date) = xsd:date ) ||"
+				+ " ( datatype(?date) = xsd:dateTime ) )  "
+				+ "&& ( regex(str(?date), \"1982-01-11\") )"
+				+ "&& (regex(str(?place),\"Australia\") ||"
+				+ " regex(str(?place),\"Melbourne\")) ) }";
 		TestQueryPatternAnalysis test = new TestQueryPatternAnalysis();
 		test.jena(a);
 		test.getQueryString();
@@ -85,10 +87,13 @@ public class TestQueryPatternAnalysis {
 								for (Expr expr : fun) {
 									if (expr.isVariable()) {
 										System.out.println(expr.getExprVar());
-										addVariablLists(expr.getExprVar().asVar());
+										addVariablLists(expr.getExprVar()
+												.asVar());
 
-									}else if (expr.isFunction()){
-										Var ex = expr.getFunction().getVarsMentioned().iterator().next();
+									} else if (expr.isFunction()) {
+										Var ex = expr.getFunction()
+												.getVarsMentioned().iterator()
+												.next();
 										System.out.println(ex);
 										addVariablLists(ex);
 									}
@@ -127,7 +132,7 @@ public class TestQueryPatternAnalysis {
 			ElementWalker.walk(q.getQueryPattern(), new ElementVisitorBase() {
 				public void visit(ElementPathBlock el) {
 					// when it's a block of triples, add in some triple
-					
+
 					Iterator<Var> itr = getVariablLists().iterator();
 					while (itr.hasNext()) {
 						Var var = itr.next();
@@ -136,20 +141,25 @@ public class TestQueryPatternAnalysis {
 							TriplePath t = triples.next();
 
 							if (t.getSubject().isVariable()) {
-								if (t.getSubject().toString().equals(var.toString())) {
-									System.out.println("regex var was: subject");
+								if (t.getSubject().toString()
+										.equals(var.toString())) {
+									System.out
+											.println("regex var was: subject");
 								}
 							}
 							if (t.getPredicate().isVariable()) {
-								if (t.getPredicate().toString().equals(var.toString())) {
-									System.out.println("regex var was: predicate");
+								if (t.getPredicate().toString()
+										.equals(var.toString())) {
+									System.out
+											.println("regex var was: predicate");
 								}
 							}
 							if (t.getObject().isVariable()) {
 								if (t.getObject().toString()
 										.equals(var.toString())) {
 									System.out.println("regex var was: object");
-									System.out.println(t.getPredicate().getURI());
+									System.out.println(t.getPredicate()
+											.getURI());
 								}
 							}
 						}
@@ -169,8 +179,8 @@ public class TestQueryPatternAnalysis {
 				}
 				CopyOfPrefixes pre = new CopyOfPrefixes();
 				String onePrefix = pre.prefixes.get(prefix.toLowerCase());
-				String prefix2 = "PREFIX " + prefix.toLowerCase() + ": <" + onePrefix + ">\n"
-						+ query;
+				String prefix2 = "PREFIX " + prefix.toLowerCase() + ": <"
+						+ onePrefix + ">\n" + query;
 				// System.out.println(prefix2);
 				setQueryString(prefix2);
 				jena(getQueryString());

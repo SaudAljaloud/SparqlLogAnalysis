@@ -20,6 +20,10 @@ import com.hp.hpl.jena.sparql.syntax.ElementFilter;
 import com.hp.hpl.jena.sparql.syntax.ElementVisitorBase;
 import com.hp.hpl.jena.sparql.syntax.ElementWalker;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class Query {
 	Logger log = org.slf4j.LoggerFactory.getLogger(Query.class);
 	private String queryString;
@@ -105,16 +109,16 @@ public class Query {
 		List<String> tokens = Arrays.asList(log.split("\\s+"));
 		String prequery = "";
 		for (int i = 0; i < tokens.size(); i++) {
-			if (tokens.get(i).contains("query=")){
+			if (tokens.get(i).contains("query=")) {
 				prequery = tokens.get(i).replaceFirst(".*query=", "");
 			}
 		}
-		
-//		if (log.toLowerCase().contains(" \"get ")) {
-//			prequery = tokens.get(7).replaceFirst(".*query=", "");
-//		} else {
-//			prequery = tokens.get(6).replaceFirst(".*query=", "");
-//		}
+
+		// if (log.toLowerCase().contains(" \"get ")) {
+		// prequery = tokens.get(7).replaceFirst(".*query=", "");
+		// } else {
+		// prequery = tokens.get(6).replaceFirst(".*query=", "");
+		// }
 
 		String prequery2 = prequery.replaceAll("\"|&.*", "");
 		String query = prequery2.replaceAll("((?i)bif%3Acontains)", "%3C$0%3E");

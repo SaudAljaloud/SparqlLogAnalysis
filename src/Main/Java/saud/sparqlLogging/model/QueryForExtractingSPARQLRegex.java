@@ -20,6 +20,10 @@ import com.hp.hpl.jena.sparql.syntax.ElementFilter;
 import com.hp.hpl.jena.sparql.syntax.ElementVisitorBase;
 import com.hp.hpl.jena.sparql.syntax.ElementWalker;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class QueryForExtractingSPARQLRegex {
 	Logger log = org.slf4j.LoggerFactory
 			.getLogger(QueryForExtractingSPARQLRegex.class);

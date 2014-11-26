@@ -13,6 +13,10 @@ import org.slf4j.Logger;
 
 import Main.Java.saud.sparqlLogging.model.QueryWithPatternAnalysis;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class LogFolderPatternAnalysisBiomed {
 	Logger log = org.slf4j.LoggerFactory
 			.getLogger(LogFolderPatternAnalysisBiomed.class);

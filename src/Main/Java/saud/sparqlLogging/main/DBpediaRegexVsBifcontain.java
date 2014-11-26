@@ -12,8 +12,13 @@ import Main.Java.saud.sparqlLogging.model.Query;
 import Main.Java.saud.sparqlLogging.model.Regex;
 import Main.Java.saud.sparqlLogging.model.Stats;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class DBpediaRegexVsBifcontain {
-	Logger log = org.slf4j.LoggerFactory.getLogger(DBpediaRegexVsBifcontain.class);
+	Logger log = org.slf4j.LoggerFactory
+			.getLogger(DBpediaRegexVsBifcontain.class);
 	Regex regex = new Regex();
 
 	private String queryDataset;
@@ -101,7 +106,8 @@ public class DBpediaRegexVsBifcontain {
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				numberOfLines += 1;
-				if (line.toLowerCase().contains("regex") && line.toLowerCase().contains("bif:contains")) {
+				if (line.toLowerCase().contains("regex")
+						&& line.toLowerCase().contains("bif:contains")) {
 					Query query = new Query(line);
 					if (!query.isIngenuneQueryDecoding()) {
 						query.jena(query.getQueryString());
@@ -121,7 +127,7 @@ public class DBpediaRegexVsBifcontain {
 						AddIngenuneQueriesDecoding(query
 								.getIngenuneQueryDecoding());
 					}
-					
+
 				}
 
 				// write regexes to file when max is reached

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class Stats {
 
 	private int regexesNumber = 0;
@@ -483,7 +487,8 @@ public class Stats {
 				+ IngenuneQueriesDecoding);
 		System.out.println("Number of ingenune Queries in Syntax:\t"
 				+ IngenuneQueriesSyntax);
-		System.out.println("Number of overall regexes is:\t" + getRegexesNumber());
+		System.out.println("Number of overall regexes is:\t"
+				+ getRegexesNumber());
 		System.out.println("=======================================");
 		System.out.println("Ingenuen Regexes:" + "\t" + getIngenuen());
 		System.out.println("Just *:" + "\t" + getJustStar());

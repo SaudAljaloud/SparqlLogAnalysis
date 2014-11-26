@@ -12,6 +12,10 @@ import Main.Java.saud.sparqlLogging.model.Query;
 import Main.Java.saud.sparqlLogging.model.Regex;
 import Main.Java.saud.sparqlLogging.model.Stats;
 
+/**
+ * User: Saud Aljaloud email: sza1g10@ecs.soton.ac.uk
+ */
+
 public class CopyOfLogFolder {
 	Logger log = org.slf4j.LoggerFactory.getLogger(CopyOfLogFolder.class);
 	Regex regex = new Regex();
