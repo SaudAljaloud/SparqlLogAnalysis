@@ -51,7 +51,7 @@ public class Prefixes {
 			+ "PREFIX hlisting:	<http://www.openlinksw.com/schemas/hlisting/>\n"
 			+ "PREFIX hoovers:	<http://wwww.hoovers.com/>\n"
 			+
-			// "PREFIX hrev:	<http:/www.purl.org/stuff/hrev#>\n" +
+			// "PREFIX hrev:	<http://www.purl.org/stuff/hrev#>\n" +
 			"PREFIX ical:	<http://www.w3.org/2002/12/cal/ical#>\n"
 			+ "PREFIX ir:	<http://web-semantics.org/ns/image-regions>\n"
 			+ "PREFIX itunes:	<http://www.itunes.com/DTDs/Podcast-1.0.dtd>\n"
@@ -94,7 +94,7 @@ public class Prefixes {
 			+ "PREFIX rdfs:	<http://www.w3.org/2000/01/rdf-schema#>\n"
 			+
 			// "PREFIX rev:	<http://purl.org/stuff/rev#>\n" +
-			// "PREFIX review:	<http:/www.purl.org/stuff/rev#>\n" +
+			// "PREFIX review:	<http://www.purl.org/stuff/rev#>\n" +
 			"PREFIX rss:	<http://purl.org/rss/1.0/>\n"
 			+ "PREFIX sc:	<http://purl.org/science/owl/sciencecommons/>\n"
 			+ "PREFIX scovo:	<http://purl.org/NET/scovo#>\n"
